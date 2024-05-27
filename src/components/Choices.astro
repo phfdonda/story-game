@@ -2,24 +2,25 @@
 import Card from './Card.astro'
 
 export interface Props {
-	options: [
-		{
-			title: string
-			body: string
-		}
-	]
+	options: {
+		title: string
+		body: string
+		href: string
+	}[]
 }
+
 const { options } = Astro.props
 ---
 
 <ul role="list" class="link-card-grid">
-	{
-		options.map((option) =>
-			Card({
-				title: option.title,
-				body: option.body,
-				href: ''
-			})
-		)
-	}
+	{options.map((option) => <Card title={option.title} body={option.body} href={''} />)}
 </ul>
+
+<style>
+	.link-card-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+		gap: 2rem;
+		padding: 0;
+	}
+</style>
